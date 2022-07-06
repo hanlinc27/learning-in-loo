@@ -40,7 +40,6 @@ function App() {
     <React.Fragment>
       <DataBar />
       <StyledMapTitle>learning in loo</StyledMapTitle>
-
       <MapContainer
         style={{ height: "75vh", width: "100wh" }}
         center={currentLocation}
