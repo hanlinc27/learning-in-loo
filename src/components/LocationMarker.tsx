@@ -68,6 +68,7 @@ const LocationMarker = ({ marker }: LocationMarkerProps) => {
           <Box display="flex" flexDirection="column">
             <Text>{name}</Text>
             <Text>{`temperature: ${temperature} humidity: ${humidity}% brightness: ${brightness}`}</Text>
+            <Text>{`userSatisfaction: ${userSatisfaction} totalVotes: ${totalVotes}`}</Text>
           </Box>
         </Box>
       </StyledPopup>

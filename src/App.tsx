@@ -3,10 +3,11 @@ import "leaflet/dist/leaflet.css";
 
 import { TileLayer, ZoomControl, MapContainer } from "react-leaflet";
 import "./App.css";
-import DataBar from "./components/DataBar";
-import MarkerData from "./data/index";
+import { markerData } from "./data/index";
 import styled from "styled-components";
 import LocationMarker from "./components/LocationMarker";
+import TemperatureFilter from "./components/TemperatureFilter";
+import LightFilter from "./components/LightFilter";
 
 const StyledMapTitle = styled.h1`
   font-family: "Space Grotesk", sans-serif;
@@ -21,6 +22,12 @@ const StyledMapTitle = styled.h1`
   left: 60%;
   top: 75%;
 `;
+const StyledContainer = styled.div`
+  height: 25vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
 
 function App() {
   const zoom = 15;
@@ -29,10 +36,62 @@ function App() {
   const zoomSnap = 0;
   const zoomDelta = 0.5;
   const currentLocation = { lat: 43.47029798502307, lng: -80.54188108280796 };
+  const [minTemperature, setMinTemperature] = React.useState(20);
+  const [maxTemperature, setMaxTemperature] = React.useState(30);
+  const [minBrightness, setMinBrightness] = React.useState(0);
+  const [maxBrightness, setMaxBrightness] = React.useState(600);
+
+  const [filteredMarkerData, setFilteredMarkerData] =
+    React.useState(markerData);
+
+  const handleSetTemperature = (
+    isSettingMinTemperature: boolean,
+    tempVal: number
+  ) => {
+    if (isSettingMinTemperature) {
+      setMinTemperature(tempVal);
+    } else {
+      setMaxTemperature(tempVal);
+    }
+  };
+
+  const handleSetBrightness = (
+    isSettingMinBrightness: boolean,
+    lightVal: number
+  ) => {
+    if (isSettingMinBrightness) {
+      setMinBrightness(lightVal);
+    } else {
+      setMaxBrightness(lightVal);
+    }
+  };
+
+  React.useMemo(() => {
+    setFilteredMarkerData([
+      ...markerData.filter(
+        (marker) =>
+          marker.temperature >= minTemperature &&
+          marker.temperature <= maxTemperature &&
+          marker.brightness >= minBrightness &&
+          marker.brightness <= maxBrightness
+      ),
+    ]);
+  }, [minTemperature, maxTemperature, minBrightness, maxBrightness]);
 
   return (
     <React.Fragment>
-      <DataBar />
+      <StyledContainer>
+        <TemperatureFilter
+          setTemperature={handleSetTemperature}
+          minTemperature={minTemperature}
+          maxTemperature={maxTemperature}
+        />
+        <LightFilter
+          setLight={handleSetBrightness}
+          minBrightness={minBrightness}
+          maxBrightness={maxBrightness}
+        />
+      </StyledContainer>
       <StyledMapTitle>learning in loo</StyledMapTitle>
       <MapContainer
         style={{ height: "75vh", width: "100wh" }}
@@ -46,7 +105,7 @@ function App() {
         attributionControl={false}
       >
         <TileLayer url="https://api.mapbox.com/styles/v1/shaahana/cl52t02lq001914r7jeolcfkh/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiaGFubGluYzI3IiwiYSI6ImNsNTRlaWV2cTB5dDczZG50MHA2MG8yZ28ifQ.mxHouq0r6_sHsDylxZVNNg" />
-        {MarkerData.map((marker, key) => (
+        {filteredMarkerData.map((marker, key) => (
           <LocationMarker key={key} marker={marker} />
         ))}
         <ZoomControl position="bottomleft" />

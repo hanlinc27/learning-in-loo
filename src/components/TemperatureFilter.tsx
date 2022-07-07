@@ -10,23 +10,34 @@ import {
   StyledHyphen,
 } from "./StylingComponents";
 
-const TemperatureFilter = () => {
-  const [minTemperature, setMinTemperature] = React.useState(20);
-  const [maxTemperature, setMaxTemperature] = React.useState(40);
-
+interface TemperatureFilterProps {
+  setTemperature: (isSettingMinTemperature: boolean, tempVal: number) => void;
+  minTemperature: number;
+  maxTemperature: number;
+}
+const TemperatureFilter = ({
+  setTemperature,
+  minTemperature,
+  maxTemperature,
+}: TemperatureFilterProps) => {
   const handleChange = (event: Event, newValue: number[] | number) => {
     if (Array.isArray(newValue)) {
-      setMinTemperature(newValue[0] as number);
-      setMaxTemperature(newValue[1] as number);
+      setTemperature(true, newValue[0] as number);
+      setTemperature(false, newValue[1] as number);
     }
   };
   return (
     <StyledContainer>
       <StyledHeading>Temperature Filter</StyledHeading>
       <StyledBody>
-        The average temperature on a UW-affiliated space is 23.9°C.
+        The average temperature on a UW-affiliated study space is 24°C and the
+        ideal for a classroom is 22°C.
       </StyledBody>
       <RangeSlider
+        min={20}
+        step={1}
+        max={30}
+        marks
         sliderType={SliderType.TEMPERATURE}
         onChange={handleChange}
         value={[minTemperature, maxTemperature]}
@@ -41,7 +52,7 @@ const TemperatureFilter = () => {
           size="small"
           id="min-temperature"
           value={minTemperature}
-          onChange={(e) => setMinTemperature(Number(e.target.value))}
+          onChange={(e) => setTemperature(true, Number(e.target.value))}
           label="min temperature (in °C)"
         />
         <StyledHyphen>-</StyledHyphen>
@@ -51,7 +62,7 @@ const TemperatureFilter = () => {
           size="small"
           id="max-temperature"
           label="max temperature (in °C)"
-          onChange={(e) => setMaxTemperature(Number(e.target.value))}
+          onChange={(e) => setTemperature(false, Number(e.target.value))}
         />
       </Box>
     </StyledContainer>
