@@ -11,3 +11,7 @@ export { default as e74043 } from "./e7-4043.png";
 export { default as e7Conrad } from "./e7-conrad.png";
 export { default as e7SilentStudy } from "./e7-silent-study.png";
 export { default as e7SydeLab } from "./e7-syde-lab.png";
+export { default as pacEntrance } from "./pac-entrance.png";
+export { default as qnc } from "./qnc.png";
+export { default as slc } from "./slc.png";
+export { default as stcBasement } from "./stc-basement.png";

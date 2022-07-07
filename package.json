@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@chakra-ui/react": "^2.2.1",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/icons-material": "^5.8.4",
@@ -15,7 +16,9 @@
     "@types/node": "^16.7.13",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
+    "@types/react-leaflet-markercluster": "^3.0.0",
     "@types/styled-components": "^5.1.25",
+    "framer-motion": "^6.4.2",
     "leaflet": "^1.8.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

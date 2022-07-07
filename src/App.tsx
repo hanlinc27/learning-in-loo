@@ -1,12 +1,7 @@
 import React from "react";
 import "leaflet/dist/leaflet.css";
-import {
-  TileLayer,
-  ZoomControl,
-  MapContainer,
-  Marker,
-  Popup,
-} from "react-leaflet";
+
+import { TileLayer, ZoomControl, MapContainer } from "react-leaflet";
 import "./App.css";
 import DataBar from "./components/DataBar";
 import MarkerData from "./data/index";
@@ -28,12 +23,12 @@ const StyledMapTitle = styled.h1`
 `;
 
 function App() {
-  const zoom = 16.25;
+  const zoom = 15;
   const minZoom = 14.5;
   const maxZoom = 18;
   const zoomSnap = 0;
   const zoomDelta = 0.5;
-  const currentLocation = { lat: 43.471, lng: -80.543 };
+  const currentLocation = { lat: 43.47029798502307, lng: -80.54188108280796 };
 
   return (
     <React.Fragment>
@@ -51,10 +46,10 @@ function App() {
         attributionControl={false}
       >
         <TileLayer url="https://api.mapbox.com/styles/v1/shaahana/cl52t02lq001914r7jeolcfkh/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1IjoiaGFubGluYzI3IiwiYSI6ImNsNTRlaWV2cTB5dDczZG50MHA2MG8yZ28ifQ.mxHouq0r6_sHsDylxZVNNg" />
-        <ZoomControl position="bottomleft" />
         {MarkerData.map((marker, key) => (
           <LocationMarker key={key} marker={marker} />
         ))}
+        <ZoomControl position="bottomleft" />
       </MapContainer>
     </React.Fragment>
   );

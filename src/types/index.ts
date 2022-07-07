@@ -6,6 +6,7 @@ export interface LocationData {
   userSatisfaction: UserSatifactionType;
   totalVotes: number;
   image: string;
+  imageAlt: string;
   coordinates: CoordinateType;
 }
 
