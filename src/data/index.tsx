@@ -46,7 +46,7 @@ export const markerData: LocationData[] = [
     brightness: 473.6,
     userSatisfaction: {
       positive: 80,
-      neutral: 215,
+      neutral: 15,
       negative: 5,
     },
     totalVotes: 75,

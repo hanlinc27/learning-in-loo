@@ -21,15 +21,23 @@ const StyledPopup = styled(Popup)`
   .leaflet-popup-content {
     width: auto !important;
     margin: 0px;
-    border-radius: 10px;
+    border-radius: 4px;
   }
 
   .leaflet-popup-content-wrapper {
     padding: 0px;
+    border-radius: 4px;
   }
 
   .leaflet-popup-tip {
     display: none;
+  }
+
+  .leaflet-popup-close-button {
+    margin: 8px !important;
+    border-radius: 5px !important;
+    color: white !important;
+    background-color: #333333 !important;
   }
 `;
 interface LocationMarkerProps {

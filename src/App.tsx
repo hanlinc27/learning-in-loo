@@ -151,7 +151,10 @@ function App() {
         ))}
         <ZoomControl position="topright" />
       </MapContainer>
-      <Dialog open={isTemperatureModalOpen} onClose={handleClose}>
+      <Dialog
+        open={isTemperatureModalOpen}
+        onClose={() => handleClose(SliderType.TEMPERATURE)}
+      >
         <DialogContent>
           <Box display="flex" flexDirection="column">
             <HStack justifyContent="space-between">
@@ -189,7 +192,10 @@ function App() {
           </Box>
         </DialogContent>
       </Dialog>
-      <Dialog open={isLightModalOpen} onClose={handleClose}>
+      <Dialog
+        open={isLightModalOpen}
+        onClose={() => handleClose(SliderType.LIGHT)}
+      >
         <DialogContent>
           <Box display="flex" flexDirection="column">
             <HStack justifyContent="space-between">
@@ -201,7 +207,7 @@ function App() {
                 backgroundColor="white"
                 border="none"
                 cursor="pointer"
-                onClick={() => handleClose(SliderType.TEMPERATURE)}
+                onClick={() => handleClose(SliderType.LIGHT)}
               />
             </HStack>
             <Text fontSize="12px" fontFamily="Space Grotesk, sans-serif">
