@@ -72,7 +72,7 @@ const LightFilter = ({
           fullWidth
           value={minBrightness}
           onChange={(e) => setLight(true, Number(e.target.value))}
-          label="brightness level (%)"
+          label="brightness level (in Lux)"
         />
         <StyledHyphen>-</StyledHyphen>
         <TextField
@@ -80,7 +80,7 @@ const LightFilter = ({
           size="small"
           fullWidth
           id="max-light"
-          label="brightness level (%)"
+          label="brightness level (in Lux)"
           onChange={(e) => setLight(false, Number(e.target.value))}
         />
       </Box>

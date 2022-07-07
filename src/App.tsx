@@ -8,6 +8,7 @@ import styled from "styled-components";
 import LocationMarker from "./components/LocationMarker";
 import TemperatureFilter from "./components/TemperatureFilter";
 import LightFilter from "./components/LightFilter";
+import { Box } from "@chakra-ui/react";
 
 const StyledMapTitle = styled.h1`
   font-family: "Space Grotesk", sans-serif;
@@ -20,7 +21,7 @@ const StyledMapTitle = styled.h1`
   z-index: 500;
   position: absolute;
   left: 60%;
-  top: 75%;
+  top: 70vh;
 `;
 const StyledContainer = styled.div`
   height: 25vh;
@@ -93,6 +94,23 @@ function App() {
         />
       </StyledContainer>
       <StyledMapTitle>learning in loo</StyledMapTitle>
+      <Box
+        w="520px"
+        top="85vh"
+        fontSize="12px"
+        background="white"
+        padding="8px 16px"
+        position="absolute"
+        mt="24px"
+        left="60%"
+        zIndex="500"
+      >
+        Navigate our virtual University of Waterloo campus and learn about
+        different learning spaces for SYDE students. Use the filters at the top
+        of the page to target your ideal temperature and lighting environments.
+        See the resulting recommended study spaces based on primary sensor data
+        research gathered in S2022.
+      </Box>
       <MapContainer
         style={{ height: "75vh", width: "100wh" }}
         center={currentLocation}
@@ -108,7 +126,7 @@ function App() {
         {filteredMarkerData.map((marker, key) => (
           <LocationMarker key={key} marker={marker} />
         ))}
-        <ZoomControl position="bottomleft" />
+        <ZoomControl position="topright" />
       </MapContainer>
     </React.Fragment>
   );
