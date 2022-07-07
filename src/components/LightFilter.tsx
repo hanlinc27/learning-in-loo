@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Flex, IconButton } from "@chakra-ui/react";
+import { InfoOutlineIcon } from "@chakra-ui/icons";
 import { RangeSlider, SliderThumbComponent, SliderType } from "./Slider";
 import TextField from "@mui/material/TextField";
 import { Box } from "@mui/system";
@@ -35,12 +37,14 @@ interface LightFilterProps {
   setLight: (isSettingMinLight: boolean, lightVal: number) => void;
   minBrightness: number;
   maxBrightness: number;
+  onOpen: () => void;
 }
 
 const LightFilter = ({
   setLight,
   minBrightness,
   maxBrightness,
+  onOpen,
 }: LightFilterProps) => {
   const handleChange = (event: Event, newValue: number[] | number) => {
     if (Array.isArray(newValue)) {
@@ -50,7 +54,20 @@ const LightFilter = ({
   };
   return (
     <StyledContainer>
-      <StyledHeading>Light Filter</StyledHeading>
+      <Flex direction="row">
+        <StyledHeading>Light Filter</StyledHeading>
+        <IconButton
+          backgroundColor="white"
+          onClick={onOpen}
+          marginBottom="8px"
+          marginLeft="8px"
+          cursor="pointer"
+          border="none"
+          aria-label="Temperature Info"
+          fontSize="16px"
+          icon={<InfoOutlineIcon />}
+        />
+      </Flex>
       <StyledBody>
         The average brightness on a UW-affiliated space is 50%.
       </StyledBody>

@@ -8,7 +8,15 @@ import styled from "styled-components";
 import LocationMarker from "./components/LocationMarker";
 import TemperatureFilter from "./components/TemperatureFilter";
 import LightFilter from "./components/LightFilter";
-import { Box } from "@chakra-ui/react";
+import { SliderType } from "./components/Slider";
+import { Dialog, DialogContent } from "@mui/material";
+
+import { Box, Text, Image, HStack, CloseButton } from "@chakra-ui/react";
+import {
+  lightDescriptionInfo,
+  lightSlider,
+  temperatureSlider,
+} from "./assets/index";
 
 const StyledMapTitle = styled.h1`
   font-family: "Space Grotesk", sans-serif;
@@ -41,6 +49,19 @@ function App() {
   const [maxTemperature, setMaxTemperature] = React.useState(30);
   const [minBrightness, setMinBrightness] = React.useState(0);
   const [maxBrightness, setMaxBrightness] = React.useState(600);
+  const [isTemperatureModalOpen, setIsTemperatureModalOpen] =
+    React.useState(false);
+  const [isLightModalOpen, setIsLightModalOpen] = React.useState(false);
+
+  const onOpen = (type: SliderType) =>
+    type === SliderType.TEMPERATURE
+      ? setIsTemperatureModalOpen(true)
+      : setIsLightModalOpen(true);
+
+  const handleClose = (type: SliderType) =>
+    type === SliderType.TEMPERATURE
+      ? setIsTemperatureModalOpen(false)
+      : setIsLightModalOpen(false);
 
   const [filteredMarkerData, setFilteredMarkerData] =
     React.useState(markerData);
@@ -83,11 +104,13 @@ function App() {
     <React.Fragment>
       <StyledContainer>
         <TemperatureFilter
+          onOpen={() => onOpen(SliderType.TEMPERATURE)}
           setTemperature={handleSetTemperature}
           minTemperature={minTemperature}
           maxTemperature={maxTemperature}
         />
         <LightFilter
+          onOpen={() => onOpen(SliderType.LIGHT)}
           setLight={handleSetBrightness}
           minBrightness={minBrightness}
           maxBrightness={maxBrightness}
@@ -128,6 +151,102 @@ function App() {
         ))}
         <ZoomControl position="topright" />
       </MapContainer>
+      <Dialog open={isTemperatureModalOpen} onClose={handleClose}>
+        <DialogContent>
+          <Box display="flex" flexDirection="column">
+            <HStack justifyContent="space-between">
+              {" "}
+              <Text fontSize="14px" fontFamily="Space Grotesk, sans-serif">
+                What is a temperature filter?
+              </Text>
+              <CloseButton
+                backgroundColor="white"
+                border="none"
+                cursor="pointer"
+                onClick={() => handleClose(SliderType.TEMPERATURE)}
+              />
+            </HStack>
+            <Text fontSize="12px" fontFamily="Space Grotesk, sans-serif">
+              This temperature filter presents the physical quantity of
+              temperature which expresses how hot or cold something is. The
+              filter below has a lower bound of 20°C and an upper bound of 30°C.
+              Based on the current measurements, most UW buildings have a
+              temperature between 22-26°C. Leverage the temperature filter to
+              determine study spaces that fulfil your ideal temperature
+              requirements.
+            </Text>
+            <Image src={temperatureSlider} />
+            <Text fontSize="14px" fontFamily="Space Grotesk, sans-serif">
+              How did we obtain these temperature values?
+            </Text>
+            <Text fontSize="12px" fontFamily="Space Grotesk, sans-serif">
+              Through taking sensor measurements over X period of time across
+              various rooms SYDE students frequent, we determined an average
+              temperature associated with each location. This temperature was
+              measured in the morning, afternoon, and evening with limied
+              variability.
+            </Text>
+          </Box>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={isLightModalOpen} onClose={handleClose}>
+        <DialogContent>
+          <Box display="flex" flexDirection="column">
+            <HStack justifyContent="space-between">
+              {" "}
+              <Text fontSize="14px" fontFamily="Space Grotesk, sans-serif">
+                What is a light filter?
+              </Text>
+              <CloseButton
+                backgroundColor="white"
+                border="none"
+                cursor="pointer"
+                onClick={() => handleClose(SliderType.TEMPERATURE)}
+              />
+            </HStack>
+            <Text fontSize="12px" fontFamily="Space Grotesk, sans-serif">
+              This light filter presents light as a Lux value and allows users
+              to define their ideal light levels as a function of Lux (not
+              considering that light perception is also affected by the colour
+              of light, room layout, etc).
+            </Text>
+            <Image src={lightSlider} />
+            <Text fontSize="14px" fontFamily="Space Grotesk, sans-serif">
+              What is a Lux and what are recommended Lux values?{" "}
+            </Text>
+            <Text fontSize="12px" fontFamily="Space Grotesk, sans-serif">
+              A Lux is the measurement of actual light available at a certain
+              distance from the light source [1]. The Illuminating Engineering
+              Society (IES), an accredited Standards Development Organization in
+              America recommends a lighting level of 500-1000 Lux [2] for rooms
+              with “difficult reading and writing” which is higher than the
+              typical lighting in measured UW study spaces.
+            </Text>
+            <Image src={lightDescriptionInfo} />
+            <Text fontSize="12px" fontFamily="Space Grotesk, sans-serif">
+              Source[3]{" "}
+            </Text>
+            <Text fontSize="14px" fontFamily="Space Grotesk, sans-serif">
+              How did we obtain these values?{" "}
+            </Text>
+            <Text fontSize="12px" fontFamily="Space Grotesk, sans-serif">
+              Through taking sensor measurements over X period of time across
+              various rooms SYDE students frequent, we determined an average Lux
+              value associated with each location.
+            </Text>
+            <Text fontSize="12px" fontFamily="Space Grotesk, sans-serif">
+              Sources: [1] Shedding light on Lumens, lux and latitude. CineD.
+              (2016, January 29). Retrieved July 6, 2022, from
+              https://www.cined.com/shedding-light-lumens-lux-latitude/ [2]
+              Carrington, M. (2022, June 29). IES. Illuminating Engineering
+              Society. Retrieved July 6, 2022, from https://www.ies.org/ [3]
+              Haynes, R. (2020, May 20). The relationship between Lux, lumen and
+              watt. TACHYON Light. Retrieved July 6, 2022, from
+              https://tachyonlight.com/the-relationship-between-lux-lumen-and-watt/
+            </Text>
+          </Box>
+        </DialogContent>
+      </Dialog>
     </React.Fragment>
   );
 }

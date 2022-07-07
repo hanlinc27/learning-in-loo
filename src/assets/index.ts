@@ -15,3 +15,6 @@ export { default as pacEntrance } from "./pac-entrance.png";
 export { default as qnc } from "./qnc.png";
 export { default as slc } from "./slc.png";
 export { default as stcBasement } from "./stc-basement.png";
+export { default as lightDescriptionInfo } from "./light-description-info.svg";
+export { default as lightSlider } from "./light-slider.svg";
+export { default as temperatureSlider } from "./temperature-slider.svg";

@@ -1,4 +1,6 @@
 import React from "react";
+import { InfoOutlineIcon } from "@chakra-ui/icons";
+import { Flex, IconButton } from "@chakra-ui/react";
 
 import { RangeSlider, SliderThumbComponent, SliderType } from "./Slider";
 import TextField from "@mui/material/TextField";
@@ -9,16 +11,17 @@ import {
   StyledBody,
   StyledHyphen,
 } from "./StylingComponents";
-
 interface TemperatureFilterProps {
   setTemperature: (isSettingMinTemperature: boolean, tempVal: number) => void;
   minTemperature: number;
   maxTemperature: number;
+  onOpen: () => void;
 }
 const TemperatureFilter = ({
   setTemperature,
   minTemperature,
   maxTemperature,
+  onOpen,
 }: TemperatureFilterProps) => {
   const handleChange = (event: Event, newValue: number[] | number) => {
     if (Array.isArray(newValue)) {
@@ -28,7 +31,21 @@ const TemperatureFilter = ({
   };
   return (
     <StyledContainer>
-      <StyledHeading>Temperature Filter</StyledHeading>
+      <Flex direction="row">
+        <StyledHeading>Temperature Filter</StyledHeading>
+        <IconButton
+          backgroundColor="white"
+          onClick={onOpen}
+          marginBottom="8px"
+          marginLeft="8px"
+          cursor="pointer"
+          border="none"
+          aria-label="Temperature Info"
+          fontSize="16px"
+          icon={<InfoOutlineIcon />}
+        />
+      </Flex>
+
       <StyledBody>
         The average temperature on a UW-affiliated study space is 24°C and the
         ideal for a classroom is 22°C.
