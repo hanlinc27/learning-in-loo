@@ -2,11 +2,14 @@ import React from "react";
 import Slider, { SliderThumb } from "@mui/material/Slider";
 import { styled } from "@mui/material/styles";
 
+// Slider enums for the slider type
 export enum SliderType {
   TEMPERATURE = "Temperature",
   LIGHT = "Light",
 }
 
+// Custom range slider customization to adhere to design handoff documentation
+// different customizations for the slider depending on if it's the temperature or the light slider
 export const RangeSlider = styled(Slider)(
   ({ sliderType }: { sliderType: SliderType }) => ({
     height: 3,
@@ -56,6 +59,7 @@ export const RangeSlider = styled(Slider)(
 
 interface SliderThumbComponentProps extends React.HTMLAttributes<unknown> {}
 
+// Custom slider thumb component where the user drags and interacts with it
 export function SliderThumbComponent(props: SliderThumbComponentProps) {
   const { children, ...other } = props;
   return (

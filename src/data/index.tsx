@@ -1,7 +1,6 @@
 import React from "react";
 import { LocationData } from "../types";
 
-//would be realtime
 import {
   cmhImage,
   e7Conrad,
@@ -15,11 +14,12 @@ import {
   dcLibrary,
   e7Atrium,
   pacEntrance,
-  slc,
   stcBasement,
   qnc,
 } from "../assets";
 
+// This is the data that was collected with the environmental monitoring system and translated into location data
+// For the different markers on the map, we need to display the location name, temperature, humidity, and brightness
 export const markerData: LocationData[] = [
   {
     name: "Claudette Miller Hall",
@@ -268,7 +268,7 @@ export const markerData: LocationData[] = [
       negative: 33,
     },
     totalVotes: 19,
-    image: qnc,
+    image: e7Atrium,
     imageAlt: "Open area photo of E7 6th Floor Atrium",
     coordinates: {
       latitude: 43.47296412,

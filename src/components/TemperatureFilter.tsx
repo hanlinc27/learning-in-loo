@@ -11,6 +11,8 @@ import {
   StyledBody,
   StyledHyphen,
 } from "./StylingComponents";
+
+// Temperature filter props interface to pass in setting min and max temperature
 interface TemperatureFilterProps {
   setTemperature: (isSettingMinTemperature: boolean, tempVal: number) => void;
   minTemperature: number;
@@ -23,6 +25,7 @@ const TemperatureFilter = ({
   maxTemperature,
   onOpen,
 }: TemperatureFilterProps) => {
+  // The temperature slider is a range slider, so we need to set the min and max values to the min and max temperature values
   const handleChange = (event: Event, newValue: number[] | number) => {
     if (Array.isArray(newValue)) {
       setTemperature(true, newValue[0] as number);

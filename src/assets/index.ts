@@ -1,5 +1,6 @@
 // Default exports of PNG assets for easy import into components
 // (https://www.typescriptlang.org/docs/handbook/modules.html#:~:text=Default%20exports%20are%20meant%20to,is%20exported%20from%20the%20module)
+// Photos were collected from campus by the author
 export { default as cmhImage } from "./cmh.png";
 export { default as danaPorterImage } from "./dana-porter.png";
 export { default as dcLibrary } from "./dc-library.png";

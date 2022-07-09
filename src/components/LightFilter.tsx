@@ -12,6 +12,7 @@ import {
   StyledHyphen,
 } from "./StylingComponents";
 
+// Marks to space apart the slider by 100 increments, ranging the scale from 0-600 Lux
 const marks = [
   {
     value: 0,
@@ -33,6 +34,8 @@ const marks = [
   },
 ];
 
+// The data props that we pass in to the light slider has a callback function so that the location markers on the map can update
+// with the relevent light level preferences
 interface LightFilterProps {
   setLight: (isSettingMinLight: boolean, lightVal: number) => void;
   minBrightness: number;
@@ -46,12 +49,14 @@ const LightFilter = ({
   maxBrightness,
   onOpen,
 }: LightFilterProps) => {
+  // The light slider is a range slider, so we need to set the min and max values to the min and max brightness values
   const handleChange = (event: Event, newValue: number[] | number) => {
     if (Array.isArray(newValue)) {
       setLight(true, newValue[0] as number);
       setLight(false, newValue[1] as number);
     }
   };
+  // Return the light slider UI by leveraging the RangeSlider component
   return (
     <StyledContainer>
       <Flex direction="row">

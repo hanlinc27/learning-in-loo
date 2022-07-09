@@ -1,10 +1,12 @@
 import styled from "styled-components";
 
+// Custom styled container for the slider
 export const StyledContainer = styled.div`
   padding: 28px 36px;
   width: 50%;
 `;
 
+// Custom styled heading for the temperature and light filters
 export const StyledHeading = styled.div`
   font-family: "Space Grotesk", sans-serif;
   font-style: normal;
@@ -15,6 +17,7 @@ export const StyledHeading = styled.div`
   margin-bottom: 8px;
 `;
 
+// Custom styled body text for the temperature and light filters
 export const StyledBody = styled.div`
   font-family: "Space Grotesk", sans-serif;
   font-style: normal;

@@ -18,6 +18,7 @@ import {
   temperatureSlider,
 } from "./assets/index";
 
+// Custom styled component for the map title to place it in the bottom right corner
 const StyledMapTitle = styled.h1`
   font-family: "Space Grotesk", sans-serif;
   font-size: 72px;
@@ -31,6 +32,8 @@ const StyledMapTitle = styled.h1`
   left: 60%;
   top: 70vh;
 `;
+
+// Custom styled container for the entire page to split the filter view from the map view
 const StyledContainer = styled.div`
   height: 25vh;
   display: flex;
@@ -39,33 +42,44 @@ const StyledContainer = styled.div`
 `;
 
 function App() {
+  // Default zoom level for the user
   const zoom = 15;
+  // The minimum zoom they can zoom in to
   const minZoom = 14.5;
+  // The maximum zoom they can zoom out to
   const maxZoom = 18;
   const zoomSnap = 0;
   const zoomDelta = 0.5;
+  // Current location approximately at the Earth Sciences Building in the University of Waterloo
   const currentLocation = { lat: 43.47029798502307, lng: -80.54188108280796 };
+  // React state hooks to set minimum and maximum temperature
   const [minTemperature, setMinTemperature] = React.useState(20);
   const [maxTemperature, setMaxTemperature] = React.useState(30);
+  // React state hooks to set minimum and maximum light levels
   const [minBrightness, setMinBrightness] = React.useState(0);
   const [maxBrightness, setMaxBrightness] = React.useState(600);
+  // Information modal state hooks to open and close
   const [isTemperatureModalOpen, setIsTemperatureModalOpen] =
     React.useState(false);
   const [isLightModalOpen, setIsLightModalOpen] = React.useState(false);
 
+  // Function to open the information modal
   const onOpen = (type: SliderType) =>
     type === SliderType.TEMPERATURE
       ? setIsTemperatureModalOpen(true)
       : setIsLightModalOpen(true);
 
+  // Callback function to close the information modal
   const handleClose = (type: SliderType) =>
     type === SliderType.TEMPERATURE
       ? setIsTemperatureModalOpen(false)
       : setIsLightModalOpen(false);
 
+  // State hook to set the current filtered marker data that is associated with the user's preferences
   const [filteredMarkerData, setFilteredMarkerData] =
     React.useState(markerData);
 
+  // Function to set temperature based on the user's preferences
   const handleSetTemperature = (
     isSettingMinTemperature: boolean,
     tempVal: number
@@ -77,6 +91,7 @@ function App() {
     }
   };
 
+  // Function to set light based on the user's preferences
   const handleSetBrightness = (
     isSettingMinBrightness: boolean,
     lightVal: number
@@ -88,6 +103,8 @@ function App() {
     }
   };
 
+  // Function to filter the marker data based on the user's preferences
+  // The function is memoized to reduce unnecessary renders
   React.useMemo(() => {
     setFilteredMarkerData([
       ...markerData.filter(

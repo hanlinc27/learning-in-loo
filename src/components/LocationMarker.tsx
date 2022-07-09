@@ -17,6 +17,7 @@ import humidityLogo from "../assets/humidityLogo.svg";
 import brightnessLogo from "../assets/brightnessLogo.svg";
 import styled from "styled-components";
 
+// Styled components for the location marker popup that displays the location name, temperature, humidity, and brightness
 const StyledPopup = styled(Popup)`
   .leaflet-popup-content {
     width: auto !important;
@@ -44,6 +45,8 @@ interface LocationMarkerProps {
   marker: LocationData;
 }
 
+// The satisfaction scale demonstrates the percentage of what users think of the location with positive, neutral, and
+// negative indicators
 const SatisfactionScale = ({
   positive,
   neutral,
@@ -152,6 +155,7 @@ const SatisfactionScale = ({
   );
 };
 
+// Child component to display the environmental factor measurement on the location marker
 const PopupEnvironmentalFactor = ({
   logoUrl,
   factor,
@@ -179,6 +183,7 @@ const PopupEnvironmentalFactor = ({
   );
 };
 
+// The location marker component that displays the location name, temperature, humidity, and brightness
 const LocationMarker = ({ marker }: LocationMarkerProps) => {
   const {
     name,
