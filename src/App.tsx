@@ -10,6 +10,7 @@ import TemperatureFilter from "./components/TemperatureFilter";
 import LightFilter from "./components/LightFilter";
 import { SliderType } from "./components/Slider";
 import { Dialog, DialogContent } from "@mui/material";
+import { hotjar } from "react-hotjar";
 
 import { Box, Text, Image, HStack, CloseButton } from "@chakra-ui/react";
 import {
@@ -42,6 +43,8 @@ const StyledContainer = styled.div`
 `;
 
 function App() {
+  hotjar.initialize(3065581, 6);
+
   // Default zoom level for the user
   const zoom = 15;
   // The minimum zoom they can zoom in to
