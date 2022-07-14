@@ -43,8 +43,6 @@ const StyledContainer = styled.div`
 `;
 
 function App() {
-  hotjar.initialize(3065581, 6);
-
   // Default zoom level for the user
   const zoom = 15;
   // The minimum zoom they can zoom in to
@@ -120,6 +118,9 @@ function App() {
     ]);
   }, [minTemperature, maxTemperature, minBrightness, maxBrightness]);
 
+  React.useEffect(() => {
+    hotjar.initialize(3065581, 6);
+  }, []);
   return (
     <React.Fragment>
       <StyledContainer>
